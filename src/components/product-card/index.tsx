@@ -17,14 +17,14 @@ const ProductCard: FC<ProductCardProps> = (props) => {
           'opacity-60': outOfStock
         })}
       >
-        <div className='border-color-palette-greyLight relative h-[315px] w-full rounded-md border'>
+        <div className='relative h-[315px] w-full rounded-md border border-color-palette-greyLight'>
           <Image src={image} alt={name} className='rounded-md' />
         </div>
         <div className='mt-sm flex items-center gap-2'>
           <Text tag='small' className='text-color-palette-greyDark'>
             {category}
           </Text>
-          <div className='bg-color-palette-brandPrimary h-3 w-3 rounded-xs' />
+          <div className='h-3 w-3 rounded-xs bg-color-palette-brandPrimary' />
         </div>
         <div className='mt-sm flex items-center justify-between'>
           <Text tag='span' className='text-sm !font-medium'>
@@ -35,7 +35,7 @@ const ProductCard: FC<ProductCardProps> = (props) => {
           </Text>
         </div>
         {outOfStock && (
-          <Text tag='small' className='text-color-palette-brandLight mt-sm'>
+          <Text tag='small' className='mt-sm text-color-palette-brandLight'>
             Out of Stock
           </Text>
         )}

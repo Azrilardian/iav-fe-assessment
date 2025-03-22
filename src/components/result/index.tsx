@@ -13,7 +13,7 @@ const Result: FC<ResultProps> = (props) => {
       <Text tag='h4' className='text-center'>
         {title}
       </Text>
-      <Text tag='p' className='text-color-palette-greyDark text-center'>
+      <Text tag='p' className='text-center text-color-palette-greyDark'>
         {subTitle}
       </Text>
       {extra}
