@@ -1,10 +1,12 @@
-'use client'
-
-import { ComponentProps, FC } from 'react'
+import { FC } from 'react'
 
 import { HeroUIProvider } from '@heroui/react'
 
-const Providers: FC<ComponentProps<'div'>> = ({ children }) => {
+import { ProvidersProps } from './types'
+
+const Providers: FC<ProvidersProps> = (props) => {
+  const { children } = props
+
   return <HeroUIProvider>{children}</HeroUIProvider>
 }
 

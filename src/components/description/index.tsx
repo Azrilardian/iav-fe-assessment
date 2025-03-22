@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react'
 
-import { DescriptionProps } from './index.types'
+import { DescriptionProps } from './types'
 import Text from '../text'
 
 const Description: FC<DescriptionProps> = (props) => {
