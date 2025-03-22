@@ -1,12 +1,18 @@
-import { Button as HButton } from '@heroui/react'
+import { Button as HButton, Link } from '@heroui/react'
 
-import { ButtonProps } from './types'
+import { ButtonWithLinkProps } from './types'
 
-const Button = (props: ButtonProps) => {
-  const { label, color = 'primary', ...rest } = props
+const Button = (props: ButtonWithLinkProps) => {
+  const { label, color = 'primary', link, ...rest } = props
 
   return (
-    <HButton radius='md' color={color} {...rest}>
+    <HButton
+      as={link ? Link : 'button'}
+      radius='md'
+      color={color}
+      {...rest}
+      href={link}
+    >
       {label}
     </HButton>
   )
