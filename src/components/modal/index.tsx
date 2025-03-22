@@ -12,29 +12,6 @@ import { useTranslation } from 'react-i18next'
 
 import { ModalProps } from './types'
 
-export const defaultModalMotion = {
-  variants: {
-    enter: {
-      y: 0,
-      opacity: 1,
-      transform: 'scale(0.97)',
-      transition: {
-        duration: 0.3,
-        ease: 'easeOut'
-      }
-    },
-    exit: {
-      y: 0,
-      opacity: 0,
-      transform: 'scale(1)',
-      transition: {
-        duration: 0.3,
-        ease: 'ease'
-      }
-    }
-  }
-}
-
 const Modal: FC<ModalProps> = (props) => {
   const { t } = useTranslation()
 
@@ -51,13 +28,7 @@ const Modal: FC<ModalProps> = (props) => {
 
   return (
     <>
-      <HModal
-        isOpen={visible}
-        placement='center'
-        onClose={onCancel}
-        motionProps={defaultModalMotion}
-        {...rest}
-      >
+      <HModal isOpen={visible} placement='center' onClose={onCancel} {...rest}>
         <ModalContent>
           {() => (
             <>
