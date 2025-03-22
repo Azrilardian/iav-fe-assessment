@@ -1,9 +1,15 @@
-import React from 'react'
-
 import { Button as HButton } from '@heroui/react'
 
-const Button = () => {
-  return <HButton>Button</HButton>
+import { ButtonProps } from './types'
+
+const Button = (props: ButtonProps) => {
+  const { label, color = 'primary', ...rest } = props
+
+  return (
+    <HButton radius='md' color={color} {...rest}>
+      {label}
+    </HButton>
+  )
 }
 
 export default Button
