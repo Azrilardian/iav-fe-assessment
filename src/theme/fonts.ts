@@ -15,7 +15,7 @@
  * --------------
  * xs   : 0.75rem  (12px) - Tiny text, footnotes
  * sm   : 0.875rem (14px) - Small text, captions
- * base : 1rem     (16px) - Default body text
+ * md   : 1rem     (16px) - Default body text
  * lg   : 1.125rem (18px) - Emphasized body text
  * xl   : 1.25rem  (20px) - Subheadings
  * 2xl  : 1.5rem   (24px) - Small headings
@@ -28,7 +28,7 @@
 export const fontSizes = {
   xs: 0.75,
   sm: 0.875,
-  base: 1,
+  md: 1,
   lg: 1.125,
   xl: 1.25,
   '2xl': 1.5,
