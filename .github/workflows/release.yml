@@ -1,0 +1,24 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bun setup
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: '1.2.2'
+      - name: Install bun
+        run: bun install
+      - name: Generate CHANGELOG and bump version
+        run: bun run release
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: true

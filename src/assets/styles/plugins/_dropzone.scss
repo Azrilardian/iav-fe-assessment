@@ -1,0 +1,13 @@
+.dropzone {
+  @apply min-h-[150px] cursor-pointer rounded-md border-2 border-dashed border-gray-300 bg-white p-5;
+
+  .dz-message {
+    @apply mx-8 text-center;
+  }
+
+  &.dz-started {
+    .dz-message {
+      @apply hidden;
+    }
+  }
+}

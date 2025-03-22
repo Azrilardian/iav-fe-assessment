@@ -1,0 +1,20 @@
+name: Deploy to Staging
+run-name: ${{ github.actor }} is deploying to Staging
+on:
+  push:
+    branches:
+      - staging
+jobs:
+  deploy-to-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bun Setup
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: '1.2.2'
+      - name: Install Caprover
+        run: bun install -g caprover
+      - name: Deploy
+        run: caprover deploy -h '${{ secrets.CAPROVER_ROOT_URL }}' -p '${{ secrets.CAPROVER_PASSWORD }}' -b 'staging' -a 'dashboard'

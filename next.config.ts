@@ -1,7 +1,18 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  eslint: {
+    ignoreDuringBuilds: false
+  },
+  experimental: {
+    cssChunking: true
+  },
+  env: {
+    API_BASE_URL: '',
+    SENTRY_DSN: '',
+    ENVIRONMENT: ''
+  },
+  trailingSlash: true
+}
 
-export default nextConfig;
+export default nextConfig

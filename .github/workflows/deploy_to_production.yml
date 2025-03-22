@@ -1,0 +1,20 @@
+name: Deploy to Production
+run-name: ${{ github.actor }} is deploying to Production
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy-to-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bun Setup
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: '1.2.2'
+      - name: Install Caprover
+        run: bun install -g caprover
+      - name: Deploy
+        run: caprover deploy -h '${{ secrets.CAPROVER_PROD_ROOT_URL }}' -p '${{ secrets.CAPROVER_PROD_PASSWORD }}' -b 'main' -a 'dashboard'

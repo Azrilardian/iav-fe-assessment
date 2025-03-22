@@ -1,18 +1,35 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
+
+import { colors } from './src/theme/color'
+import { fontSize } from './src/theme/fonts'
+import { borderRadius } from './src/theme/radius'
+import { screens } from './src/theme/screen'
+import { spacing } from './src/theme/space'
 
 export default {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}', './app/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
+    fontFamily: {
+      sans: ['Inter', 'sans-serif'],
+      serif: ['Inter', 'serif']
+    },
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        ...colors
       },
+      spacing: {
+        ...spacing
+      },
+      borderRadius: {
+        ...borderRadius
+      },
+      fontSize: {
+        ...fontSize
+      }
     },
+    screens: {
+      ...screens
+    }
   },
-  plugins: [],
-} satisfies Config;
+  darkMode: 'class'
+} satisfies Config

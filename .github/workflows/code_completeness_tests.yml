@@ -1,0 +1,48 @@
+name: Code Completeness Check
+run-name: ${{ github.actor }} is doing Code Completeness Check
+on:
+  pull_request:
+    branches:
+      - dev
+      - staging
+      - production
+jobs:
+  tsc-compilation:
+    name: Typescript Compilation Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bun setup
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: '1.2.2'
+      - name: Install Bun
+        run: bun install
+      - name: Typescript compilation
+        run: bun tsc
+  linting:
+    name: Linting Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bun setup
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: '1.2.2'
+      - name: Install Bun
+        run: bun install
+      - name: Run eslint
+        run: bun eslint . --ext .js,.ts,.tsx
+  formatting:
+    name: Formatting Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bun setup
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: '1.2.2'
+      - name: Install Bun
+        run: bun install
+      - name: Run prettier
+        run: bun prettier . --check
