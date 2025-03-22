@@ -65,7 +65,25 @@ const eslintConfig = [
           }
         }
       ]
-    }
+    },
+    ignores: [
+      '.parcel-cache',
+      'dist',
+      'node_modules',
+      '.vscode',
+      'package.json',
+      'yarn.lock',
+      'yarn-error.log',
+      '.husky',
+      '.prettierignore',
+      '.eslintignore',
+      '.gitignore',
+      '.docker',
+      '.dockerignore',
+      'captain-definition',
+      'nginx.conf',
+      '.env.example'
+    ]
   }
 ]
 
