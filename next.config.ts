@@ -5,7 +5,9 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: false
   },
   experimental: {
-    cssChunking: true
+    cssChunking: true,
+    useLightningcss: true,
+    optimizePackageImports: ['@heroui/react']
   },
   env: {
     API_BASE_URL: '',
