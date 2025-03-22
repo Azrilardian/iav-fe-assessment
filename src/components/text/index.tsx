@@ -5,12 +5,12 @@ import classNames from 'classnames'
 import { TagVariants, TextProps } from './types'
 
 const variantClassNames: Record<TagVariants, string> = {
-  h1: 'font-semibold text-title-3 leading-9 text',
-  h2: 'font-semibold text-title-2 leading-loose text',
-  h3: 'font-bold text-title-1 leading-7 text',
-  p: 'font-normal text-body-1 leading-normal text',
-  small: 'font-medium text-small text',
-  span: 'font-normal text-caption leading-normal text'
+  h1: 'font-semibold text-5xl leading-normal',
+  h2: 'font-semibold text-4xl leading-normal',
+  h3: 'font-bold text-3xl leading-normal',
+  p: 'font-normal text-base leading-normal',
+  small: 'font-medium text-xs leading-normal',
+  span: 'font-normal text-base leading-normal'
 }
 
 const Text = ({ tag = 'p', children, className, ...props }: TextProps) => (

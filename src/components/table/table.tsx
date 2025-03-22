@@ -97,7 +97,7 @@ const Table = <TableValues extends object>(props: TableProps<TableValues>) => {
   const bottomContent = useMemo(() => {
     return (
       <div className='flex items-center justify-between px-2 py-2'>
-        <span className='text-small text-default-400 w-[30%]'>
+        <span className='w-[30%] text-small text-default-400'>
           {selectedKeys === 'all'
             ? 'All items selected'
             : `${selectedKeys.size} of ${data.length} selected`}

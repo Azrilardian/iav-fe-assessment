@@ -24,7 +24,7 @@ const TableError = ({ table }: TableErrorProps) => {
       <tr>
         <td colSpan={table.getAllColumns().length}>
           <div className='pb-3 pt-2 text-center'>
-            <div className='d-flex align-items-center justify-content-center text-danger mb-2'>
+            <div className='d-flex align-items-center justify-content-center mb-2 text-danger'>
               <i className='mdi mdi-alert-rhombus mdi-24px me-1'></i>
               <h4 className='m-0'>{t('Unexpected Error')}</h4>
               <i className='mdi mdi-alert-rhombus mdi-24px ms-1'></i>

@@ -19,29 +19,22 @@
  *
  * Whatever you choose, try to stick with these, and not freestyle it everywhere.
  *
- * Why EM?
- * --------
- * We use EM units instead of pixels because:
- * - Scales with user's browser font settings (accessibility)
- * - Easier responsive design implementation
- * - Consistent scaling across the application
- *
  * Size Reference:
  * --------------
- * xs     : 0.25em  (4px) - Tiny text, footnotes
- * sm     : 0.5em (8px) - Small text, captions
- * md     : 0.75em (12px) - Default body text
- * mdAlt  : 0.875em (14px) - Emphasized body text
- * rg     : 1em  (16px) - Subheadings
- * rgAlt  : 1.5em   (24px) - Small headings
- * lg     : 2em  (32px) - Medium headings
- * lgAlt  : 2.25em   (36px) - Small headings
- * xl     : 2.5em     (40px) - Large headings
- * xlAlt  : 3em   (48px) - Extra large headings
- * 2xl    : 3.375em   (54px) - Extra large headings
- * 3xl    : 4em     (64px) - Extra large headings
- * 4xl    : 4.375em   (70px) - Extra large headings
- * 5xl    : 5.3125em   (85px) - Extra large headings
+ * xs     : 0.25rem  (4px) - Tiny text, footnotes
+ * sm     : 0.5rem (8px) - Small text, captions
+ * md     : 0.75rem (12px) - Default body text
+ * mdAlt  : 0.875rem (14px) - Emphasized body text
+ * rg     : 1rem  (16px) - Subheadings
+ * rgAlt  : 1.5rem   (24px) - Small headings
+ * lg     : 2rem  (32px) - Medium headings
+ * lgAlt  : 2.25rem   (36px) - Small headings
+ * xl     : 2.5rem     (40px) - Large headings
+ * xlAlt  : 3rem   (48px) - Extra large headings
+ * 2xl    : 3.375rem   (54px) - Extra large headings
+ * 3xl    : 4rem     (64px) - Extra large headings
+ * 4xl    : 4.375rem   (70px) - Extra large headings
+ * 5xl    : 5.3125rem   (85px) - Extra large headings
  */
 
 export const space = {
@@ -64,7 +57,7 @@ export const space = {
 export const spacing = Object.entries(space).reduce(
   (acc, [key, value]) => ({
     ...acc,
-    [key]: `${value}em`
+    [key]: `${value}rem`
   }),
   {}
 )
