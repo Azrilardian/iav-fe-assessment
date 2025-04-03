@@ -2,25 +2,23 @@ import { createElement } from 'react'
 
 import classNames from 'classnames/dedupe'
 
-import { TagVariants, TextProps } from './types'
+import { createVariantClass } from './helpers'
+import { TextProps } from './types'
 
-const variantClassNames: Record<TagVariants, string> = {
-  h1: 'font-semibold text-5xl leading-normal',
-  h2: 'font-semibold text-4xl leading-normal',
-  h3: 'font-bold text-3xl leading-normal',
-  h4: 'font-semibold text-2xl leading-normal',
-  p: 'font-normal text-sm leading-normal',
-  small: 'font-medium text-xs leading-normal',
-  span: 'font-normal text-sm leading-normal'
-}
-
-const Text = ({ tag = 'p', children, className, ...props }: TextProps) => (
+const Text = ({
+  tag = 'p',
+  variant = 'body2',
+  weight = 'normal',
+  children,
+  className,
+  ...props
+}: TextProps) => (
   <>
     {createElement(
       tag,
       {
         ...props,
-        className: classNames(variantClassNames[tag], className)
+        className: classNames(createVariantClass(variant, weight), className)
       },
       children
     )}
