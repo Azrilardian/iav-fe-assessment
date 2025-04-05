@@ -18,7 +18,11 @@ const Text = ({
       tag,
       {
         ...props,
-        className: classNames(createVariantClass(variant, weight), className)
+        className: classNames(
+          createVariantClass(variant, weight),
+          tag === 'span' && 'block',
+          className
+        )
       },
       children
     )}
