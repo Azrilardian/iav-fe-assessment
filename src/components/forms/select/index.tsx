@@ -1,7 +1,10 @@
 import React, { FC } from 'react'
 
-import { Select, SelectItem, SelectProps } from '@heroui/react'
+import { Select, SelectItem } from '@heroui/react'
 import { Controller, useFormContext } from 'react-hook-form'
+
+import { SelectProps } from './types'
+import Icon from '../../icon'
 
 const ControlledSelect: FC<SelectProps> = (props) => {
   const { name, items, ...rest } = props
@@ -19,10 +22,24 @@ const ControlledSelect: FC<SelectProps> = (props) => {
         <Select
           items={items}
           value={value}
-          errorMessage={error.message}
+          errorMessage={
+            <div className='flex items-center gap-xsAlt'>
+              <Icon icon='icon-info' size={16} />
+              <span className='text-sm'>{error?.message}</span>
+            </div>
+          }
           isInvalid={invalid}
           onChange={onChange}
-          data-test-id={name}
+          data-test-id={`${name}-select`}
+          labelPlacement='outside'
+          classNames={{
+            label: '!text-color-palette-black text-sm',
+            errorMessage: 'text-color-palette-red text-sm',
+            trigger:
+              'border border-color-palette-greyLight bg-transparent px-md py-sm border-spacing-md',
+            value: 'text-sm',
+            helperWrapper: 'pt-xsAlt pb-0 px-0'
+          }}
           {...rest}
         >
           {(item: Record<string, any>) => (
