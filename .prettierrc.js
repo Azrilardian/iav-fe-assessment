@@ -8,5 +8,5 @@ module.exports = {
   plugins: ['prettier-plugin-tailwindcss'],
   tailwindConfig: './tailwind.config.ts',
   trailingComma: 'none',
-  printWidth: 120
+  printWidth: 80
 }
