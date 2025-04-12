@@ -1,21 +1,14 @@
 import { ApiResponse, ApisauceInstance, create } from 'apisauce'
-import dayjs from 'dayjs'
-import { snapshot } from 'valtio'
 
+import { API_BASE_URL } from '@/src/config/env'
 import { camelizeKeys, snakeCaseKeys } from 'services/api/helpers/object'
-import { authStore } from 'stores/auth-store'
-// import {
-//   setAuthenticatedUser,
-//   setRefreshingToken
-// } from 'stores/auth-store.actions'
-import { delay } from 'utils/delay'
 
 import { ApiParams, RequestMethod } from './api-core.types'
 import { getGeneralApiProblem } from './helpers/api-problem'
 import { serialize } from './helpers/serialize-formdata'
 
 export class ApiCore {
-  protected baseURL = process.env.NEXT_PUBLIC_API_BASE_URL || ''
+  protected baseURL = API_BASE_URL || ''
   protected api: ApisauceInstance
 
   /**
@@ -44,22 +37,6 @@ export class ApiCore {
    * Add a wrapper object around passed data.
    */
   protected payloadWrapper?: string
-
-  protected addHeaderTransformer() {
-    this.api.addRequestTransform((request) => {
-      const { authorization } = snapshot(authStore.computed)
-
-      request.headers.timezone = dayjs().utcOffset()
-
-      if (authorization) {
-        request.headers.Authorization = authorization
-      }
-
-      if (this.multipart) {
-        request.headers['Content-Type'] = 'multipart/form-data'
-      }
-    })
-  }
 
   protected addResponseTypeTransformer() {
     this.api.addRequestTransform((request) => {
@@ -92,61 +69,6 @@ export class ApiCore {
         request.data = this.useSnakedKey ? snakeCaseKeys(data) : data
       }
     })
-  }
-
-  protected addRefreshToken() {
-    this.api.axiosInstance.interceptors.response.use(
-      (response) => response,
-      async (error) => {
-        if (error.response.status === 401) {
-          const { refreshTokenActive } = snapshot(authStore.computed)
-          const { refreshingToken, token } = snapshot(authStore.state)
-
-          if (!refreshTokenActive) return Promise.reject(error)
-
-          const originalRequest = error.config
-          if (refreshingToken) {
-            await delay(1000)
-            originalRequest.headers.Authorization = token
-            return this.api.axiosInstance(originalRequest)
-          }
-
-          try {
-            // setRefreshingToken(true)
-            const res = await this.refreshToken()
-            if (res.ok) {
-              originalRequest.headers.Authorization = res.headers.authorization
-              return this.api.axiosInstance(originalRequest)
-            }
-          } catch {
-            return Promise.reject(error)
-          } finally {
-            // setRefreshingToken(false)
-          }
-        }
-
-        return Promise.reject(error)
-      }
-    )
-  }
-
-  public async refreshToken() {
-    const { refreshToken } = snapshot(authStore.state)
-
-    const res = await this.processResult(
-      await this.api.get(
-        'auth/refresh-token',
-        {},
-        {
-          baseURL: this.getBaseURL(),
-          headers: { 'Refresh-Token': refreshToken }
-        }
-      )
-    )
-
-    // if (res.ok) setAuthenticatedUser(res)
-
-    return res
   }
 
   protected addResponseTransformer() {
@@ -200,11 +122,9 @@ export class ApiCore {
       }
     })
 
-    this.addHeaderTransformer()
     this.addResponseTypeTransformer()
     this.addRequestParamsTransformer()
     this.addPayloadTransformer()
-    this.addRefreshToken()
     this.addResponseTransformer()
     this.addResponsePerfMetric()
   }
