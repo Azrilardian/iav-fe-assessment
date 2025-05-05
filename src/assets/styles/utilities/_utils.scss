@@ -5,3 +5,19 @@
 .text-error {
   color: theme('colors.color.palette.red');
 }
+
+.skeleton {
+  @apply animate-pulse rounded-md bg-color-palette-greyLight;
+}
+
+.paragraph-skeleton {
+  @apply h-[20px] w-full animate-pulse rounded-md bg-color-palette-greyLight;
+}
+
+.empty-content-message {
+  @apply text-color-palette-greyDark;
+}
+
+.reset-padding {
+  @apply p-0;
+}

@@ -1,5 +1,7 @@
-/* Core */
+/* Plugins */
 @use './plugins/tailwind';
+@use './plugins/dropzone';
+@use './plugins/hero-ui';
 
 /* Design Tokens */
 @use './design-tokens/animation';
@@ -10,19 +12,15 @@
 @use './design-tokens/theme';
 @use './design-tokens/typography';
 
+/* Components */
+@use './components/product-card-image';
+@use './components/products-filter-accordion';
+
 /* Generic */
 @use './generic/normalize';
-
-/* Mixins */
-@use './mixins/mixins';
-
-/* Plugins */
-@use './plugins/dropzone';
 
 /* Settings */
 @use './settings/global';
 
 /* Utils */
 @use './utilities/utils';
-
-@use './shame';

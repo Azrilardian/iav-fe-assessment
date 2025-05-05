@@ -1,0 +1,11 @@
+.hero-checkbox input + span::before {
+  border-width: 1px !important;
+}
+
+.cart-badge {
+  @apply flex h-5 w-5 translate-x-[5px] translate-y-[-5px] items-center justify-center bg-color-palette-brandPrimary text-[10px];
+}
+
+.hero-select svg {
+  @apply stroke-[2px];
+}
