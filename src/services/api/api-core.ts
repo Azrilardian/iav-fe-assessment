@@ -20,7 +20,7 @@ export class ApiCore {
   /**
    * API Request timeout in milliseconds.
    */
-  protected timeout = 10000
+  protected timeout = 50000
 
   /**
    * Enable blob response type.
@@ -138,9 +138,13 @@ export class ApiCore {
     return Promise.resolve(response)
   }
 
-  protected async callApi(method: RequestMethod, { path, payload }: ApiParams) {
+  protected async callApi(
+    method: RequestMethod,
+    { path, payload, options = {} }: ApiParams
+  ) {
     const response: ApiResponse<any> = await this.api[method](path, payload, {
-      baseURL: this.getBaseURL()
+      baseURL: this.getBaseURL(),
+      ...options
     })
 
     return await this.processResult(response)

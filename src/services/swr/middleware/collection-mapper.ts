@@ -33,7 +33,7 @@ export const mapData = (
 
       // Calculate total pages based on total data and limit ( cause the API not returns totalPages )
       if (localKey === 'totalPages') {
-        result[localKey] = Math.ceil(get(data, 'total') / get(data, 'limit'))
+        result[localKey] = Math.ceil(get(data, 'total') / 9)
         return
       }
 

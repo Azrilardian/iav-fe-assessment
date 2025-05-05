@@ -1,5 +1,3 @@
-'use server'
-
 import { swrApi } from '../api/swr-api'
 import { FetcherParams } from './helpers/swr.types'
 
