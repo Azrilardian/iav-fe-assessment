@@ -1,3 +1,7 @@
+.product-card-image-wrapper {
+  @apply flex xl:gap-smAlt;
+}
+
 .product-card-image {
-  @apply h-[315px] w-auto overflow-hidden rounded-md border border-color-palette-greyLight bg-[#f0f0f0];
+  @apply relative h-[315px] w-full overflow-hidden rounded-md border border-color-palette-greyLight bg-[#f0f0f0];
 }
