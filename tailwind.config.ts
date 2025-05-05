@@ -15,10 +15,6 @@ export default {
     './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
-    fontFamily: {
-      sans: ['Inter', 'sans-serif'],
-      serif: ['Inter', 'serif']
-    },
     extend: {
       colors: {
         ...colors
