@@ -14,9 +14,8 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['@heroui/react', 'react-hook-form']
   },
   env: {
-    API_BASE_URL: process.env.API_BASE_URL,
-    SENTRY_DSN: process.env.SENTRY_DSN,
-    ENVIRONMENT: process.env.ENVIRONMENT
+    API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
+    SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN
   },
   images: {
     remotePatterns: [{ hostname: 'cdn.dummyjson.com' }]
