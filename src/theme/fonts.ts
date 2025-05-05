@@ -20,7 +20,7 @@
  * xl   : 1.25rem  (20px) - Subheadings
  * 2xl  : 1.5rem   (24px) - Small headings
  * 3xl  : 1.75rem  (28px) - Medium headings
- * 4xl  : 2rem     (32px) - Large headings
+ * 4xl  : 1.875rem     (30px) - Large headings
  * 5xl  : 2.5rem   (40px) - Extra large headings
 
  */
@@ -33,7 +33,7 @@ export const fontSizes = {
   xl: 1.25,
   '2xl': 1.5,
   '3xl': 1.75,
-  '4xl': 2,
+  '4xl': 1.875,
   '5xl': 2.5
 }
 
