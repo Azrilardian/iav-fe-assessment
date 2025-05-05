@@ -1,15 +1,15 @@
 import { FontWeightType, TextSizeType, VariantType } from './types'
 
 const textSizeClasses: Record<TextSizeType, string> = {
-  '5xl': 'text-5xl',
-  '4xl': 'text-4xl',
-  '3xl': 'text-3xl',
-  '2xl': 'text-2xl',
-  xl: 'text-xl',
-  lg: 'text-lg',
-  md: 'text-md',
-  sm: 'text-sm',
-  xs: 'text-xs'
+  '5xl': 'text-5xl leading-9 text-color-palette-black',
+  '4xl': 'text-4xl leading-9 text-color-palette-black',
+  '3xl': 'text-3xl leading-9 text-color-palette-black',
+  '2xl': 'text-2xl text-color-palette-black',
+  xl: 'text-xl text-color-palette-black',
+  lg: 'text-lg text-color-palette-black',
+  md: 'text-md leading-6 text-color-palette-black',
+  sm: 'text-sm leading-6 text-color-palette-black',
+  xs: 'text-xs leading-6 text-color-palette-black'
 }
 
 const fontWeightClasses: Record<FontWeightType, string> = {

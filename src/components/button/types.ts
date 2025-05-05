@@ -1,9 +1,12 @@
+import { ReactNode } from 'react'
+
 import { ButtonProps as HButtonProps, LinkProps } from '@heroui/react'
 import { SubmitHandler } from 'react-hook-form'
 
 export type ButtonProps = HButtonProps & {
   testID?: string
-  label?: string
+  label?: string | ReactNode
+  withoutSpacing?: boolean
 }
 
 export type ButtonWithLinkProps = ButtonProps &

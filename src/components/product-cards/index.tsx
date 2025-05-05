@@ -1,31 +1,44 @@
-import React, { FC, memo } from 'react'
+'use client'
 
-import { v4 as uuidv4 } from 'uuid'
+import React from 'react'
 
-import { ProductCardsProps } from './types'
-import ProductCard from '../product-card'
+import { useTranslation } from 'react-i18next'
+
 import Result from '../result'
+import { useProductCards } from './hook'
+import ProductCard from './product-card'
+import ProductCardsSkeleton from './product-cards-skeleton'
+import Pagination from '../pagination'
 
-const ProductCards: FC<ProductCardsProps> = (props) => {
-  const { products, ...rest } = props
+const ProductCards = () => {
+  const { t } = useTranslation('products')
 
-  if (!products.length) {
+  const { productLoading, productsData } = useProductCards()
+
+  if (productLoading) {
+    return <ProductCardsSkeleton />
+  }
+
+  if (!productsData?.products?.length) {
     return (
       <Result
         icon='icon-success'
-        title='No products found'
-        subTitle='Please add some products'
+        title={t('no_products_found')}
+        subTitle={t('please_add_some_products')}
       />
     )
   }
 
   return (
-    <div className='grid grid-cols-3 gap-9' {...rest}>
-      {products.map((product) => (
-        <ProductCard key={uuidv4()} {...product} />
-      ))}
+    <div className='lg:flex lg:flex-col lg:items-center'>
+      <div className='mb-xl grid items-start gap-lgAlt gap-y-2xlAlt sm:grid-cols-2 lg:grid-cols-3'>
+        {productsData?.products?.map((product, index) => (
+          <ProductCard key={product.id} {...product} index={index} />
+        ))}
+      </div>
+      <Pagination data={productsData} />
     </div>
   )
 }
 
-export default memo(ProductCards)
+export default ProductCards

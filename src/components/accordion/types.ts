@@ -17,4 +17,5 @@ export type AccordionProps = {
     | ReactNode
     | ((props: AccordionItemIndicatorProps) => ReactNode)
     | null
+  keepContentMounted?: boolean
 }

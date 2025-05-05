@@ -1,3 +1,5 @@
+'use client'
+
 import { createElement } from 'react'
 
 import classNames from 'classnames/dedupe'
@@ -20,7 +22,7 @@ const Text = ({
         ...props,
         className: classNames(
           createVariantClass(variant, weight),
-          tag === 'span' && 'block',
+          'block',
           className
         )
       },

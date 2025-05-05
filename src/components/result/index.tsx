@@ -8,7 +8,7 @@ const Result: FC<ResultProps> = (props) => {
   const { icon, title, subTitle, extra, ...rest } = props
 
   return (
-    <div className='flex flex-col items-center gap-2' {...rest}>
+    <div className='flex flex-col items-center gap-1' {...rest}>
       <Icon icon={icon} />
       <Text tag='h4' className='text-center'>
         {title}

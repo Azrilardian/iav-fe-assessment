@@ -20,6 +20,7 @@ const ControlledSelect: FC<SelectProps> = (props) => {
         fieldState: { error, invalid }
       }) => (
         <Select
+          className='hero-select'
           items={items}
           value={value}
           errorMessage={

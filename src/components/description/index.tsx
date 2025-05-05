@@ -8,7 +8,7 @@ const Description: FC<DescriptionProps> = (props) => {
 
   return (
     <div>
-      <Text className='font-semibold'>{label}</Text>
+      <Text variant='body1'>{label}</Text>
       <Text>{children}</Text>
     </div>
   )

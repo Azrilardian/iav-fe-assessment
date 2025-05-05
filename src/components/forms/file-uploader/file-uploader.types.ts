@@ -15,6 +15,7 @@ export type FileUploaderProps = {
   isInvalid?: boolean
   multiSelect?: boolean
   acceptedFile?: Accept
+  maxFiles?: number
   onFileUpload?: (files?: FileType[]) => void
 }
 
@@ -22,4 +23,7 @@ export type ControlledFileUploaderProps = FileUploaderProps & {
   label?: string
   name: string
   value?: FileType[] | string
+  maxFiles?: number
+  description?: string
+  acceptedFileHint?: string
 } & ComponentProps<'div'>

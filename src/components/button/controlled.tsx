@@ -14,6 +14,7 @@ const ControlledButton = (props: ControlledButtonProps) => {
 
   return (
     <Button
+      type='submit'
       isLoading={formState.isSubmitting}
       onSubmit={props.onSubmit && handleSubmit(props.onSubmit)}
       className={classNames(props.className, {

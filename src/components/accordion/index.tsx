@@ -2,12 +2,17 @@ import React, { FC, memo } from 'react'
 
 import { AccordionItem, Accordion as HAccordion } from '@heroui/react'
 import classNames from 'classnames'
-import { v4 as uuidv4 } from 'uuid'
 
 import { AccordionProps } from './types'
 
 const Accordion: FC<AccordionProps> = (props) => {
-  const { className, defaultExpandedKeys, items, indicator } = props
+  const {
+    className,
+    defaultExpandedKeys,
+    items,
+    indicator,
+    keepContentMounted
+  } = props
 
   return (
     <HAccordion
@@ -15,10 +20,11 @@ const Accordion: FC<AccordionProps> = (props) => {
       defaultExpandedKeys={defaultExpandedKeys}
       className={classNames('px-0', className)}
       disableIndicatorAnimation={true}
+      keepContentMounted={keepContentMounted}
     >
       {items.map((item) => (
         <AccordionItem
-          key={item.key ?? uuidv4()}
+          key={item.key}
           title={item.title}
           classNames={{
             title: 'text-color-palette-black font-bold text-sm',
