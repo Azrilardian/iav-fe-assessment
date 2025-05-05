@@ -1,27 +1,28 @@
 import { ReactNode } from 'react'
 
-import type { Metadata } from 'next'
+import { cookies } from 'next/headers'
 
 import { interFont } from '@/src/assets/fonts'
 
-import '../src/assets/styles/main.scss'
-
 import App from './app'
 
-export const metadata: Metadata = {
-  title: 'Project Name',
-  description: 'Project Description'
-}
+import '../src/assets/styles/main.scss'
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: ReactNode
 }>) {
+  const userData = (await cookies()).get('userData')?.value
+  const user = userData ? JSON.parse(userData) : null
+
   return (
     <html lang='en'>
-      <body className={`${interFont.className} font-sans text-xl antialiased`}>
-        <App>{children}</App>
+      <body
+        suppressHydrationWarning
+        className={`${interFont.className} text-xl antialiased`}
+      >
+        <App user={user}>{children}</App>
       </body>
     </html>
   )

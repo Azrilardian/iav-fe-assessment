@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { lazy } from 'react'
 
 import { useSnapshot } from 'valtio'
 
-import Modal from 'components/modal'
 import { modalStore } from 'stores/modal-store'
 import { hideModal } from 'stores/modal-store.actions'
+
+const Modal = lazy(() => import('components/modal'))
 
 const ModalHandler = () => {
   const {

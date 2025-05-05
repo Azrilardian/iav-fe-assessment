@@ -1,15 +1,33 @@
 'use client'
 
-import { ReactNode } from 'react'
+import { ReactNode, useEffect } from 'react'
 
-import dynamic from 'next/dynamic'
+import Navbar from '@/src/components/navbar'
+import Providers from '@/src/components/providers'
+import ToastHandler from '@/src/handler/toast-handler'
+import { useYup } from '@/src/hooks/use-yup.hook'
+import { setUserState } from '@/src/stores/user-state-store.actions'
 
-const ClientApp = dynamic(() => import('./client-app'), {
-  ssr: false
-})
+import '../src/locales/i18n'
 
-const App = ({ children }: Readonly<{ children: ReactNode }>) => {
-  return <ClientApp>{children}</ClientApp>
+const App = ({
+  user,
+  children
+}: Readonly<{ user: any; children: ReactNode }>) => {
+  // Set locale & extra method for yup schema validator
+  useYup()
+
+  useEffect(() => {
+    setUserState(user)
+  }, [user])
+
+  return (
+    <Providers>
+      <Navbar />
+      {children}
+      <ToastHandler />
+    </Providers>
+  )
 }
 
 export default App

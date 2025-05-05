@@ -3,24 +3,25 @@ import { useEffect, useState } from 'react'
 const useNetworkStatus = () => {
   const [isOnline, setOnline] = useState(true)
 
-  const updateNetworkStatus = () => setOnline(navigator.onLine)
+  const updateNetworkStatus = () => {
+    if (typeof window !== 'undefined') {
+      setOnline(navigator.onLine)
+    }
+  }
 
-  // Force initial running the navigator event
   useEffect(() => {
+    if (typeof window === 'undefined') return null
+
     updateNetworkStatus()
-  }, [])
 
-  useEffect(() => {
-    window.addEventListener('load', updateNetworkStatus)
     window.addEventListener('online', updateNetworkStatus)
     window.addEventListener('offline', updateNetworkStatus)
 
     return () => {
-      window.removeEventListener('load', updateNetworkStatus)
       window.removeEventListener('online', updateNetworkStatus)
       window.removeEventListener('offline', updateNetworkStatus)
     }
-  }, [navigator.onLine])
+  }, [])
 
   return { isOnline }
 }
