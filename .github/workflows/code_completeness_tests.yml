@@ -6,6 +6,7 @@ on:
       - dev
       - staging
       - production
+      - main
 jobs:
   tsc-compilation:
     name: Typescript Compilation Check
