@@ -5,6 +5,8 @@ import { useController, useFormContext } from 'react-hook-form'
 
 import useToggle from '@/src/hooks/use-toggle.hook'
 
+import Icon from '../../icon'
+
 const ControlledPasswordInput: FC<InputProps> = (props) => {
   const { name, ...rest } = props
 
@@ -17,9 +19,13 @@ const ControlledPasswordInput: FC<InputProps> = (props) => {
 
   return (
     <Input
-      name={name}
       id={name}
-      errorMessage={error.message}
+      errorMessage={
+        <div className='flex items-center gap-xsAlt'>
+          <Icon icon='icon-info' size={16} />
+          <span className='text-sm'>{error?.message}</span>
+        </div>
+      }
       isInvalid={invalid}
       type={isVisible ? 'text' : 'password'}
       endContent={
@@ -35,6 +41,14 @@ const ControlledPasswordInput: FC<InputProps> = (props) => {
           )}
         </button>
       }
+      classNames={{
+        label: '!text-color-palette-black text-sm',
+        errorMessage: 'text-color-palette-red text-sm',
+        inputWrapper:
+          'border border-color-palette-greyLight bg-transparent px-md py-sm',
+        input: 'text-sm',
+        helperWrapper: 'pt-xsAlt pb-0 px-0'
+      }}
       data-test-id={name}
       {...register(name)}
       {...rest}

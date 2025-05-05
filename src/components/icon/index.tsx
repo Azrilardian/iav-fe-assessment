@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { IconProps } from './types'
 
 const Icon: FC<IconProps> = (props) => {
-  const { icon, size = '24', className } = props
+  const { icon, size = '20', className } = props
 
   return (
     <i

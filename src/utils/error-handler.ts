@@ -1,22 +1,16 @@
-import { t as translate } from 'i18next'
-
-import { logout } from 'stores/auth-store.actions'
+import { toast } from 'sonner'
 
 import { captureSentryException } from './sentry'
+import { getTranslate } from '../locales/i18n'
 import {
   ApiErrorKind,
   GeneralApiProblem
 } from '../services/api/helpers/api-problem.types'
-import { showToast } from '../stores/toast-store.actions'
 
-const t = (key: string, options?: Record<string, string | number>) =>
-  translate(key, { ns: 'common', ...options })
+const t = getTranslate('common')
 
 const showUnexpectedError = (error: any) => {
-  showToast({
-    type: 'error',
-    message: t('An unexpected error occurred')
-  })
+  toast.error(t('an_unexpected_error_occurred'))
   captureSentryException(error)
 }
 
@@ -30,7 +24,7 @@ export const handleGenericError = (error: GeneralApiProblem) => {
     const message = err?.errors || err?.message
 
     if (typeof message === 'string') {
-      showToast({ type: 'error', message })
+      toast.error(message)
       captureSentryException(error)
     } else {
       showUnexpectedError(err)
@@ -39,7 +33,7 @@ export const handleGenericError = (error: GeneralApiProblem) => {
 
   switch (error.kind) {
     case ApiErrorKind.UNAUTHORIZED:
-      logout()
+      // Must be logged out
       break
     default:
       showErrorMessage(error)

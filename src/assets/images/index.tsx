@@ -1,1 +1,6 @@
 export const defaultImage = require('./image-default.jpg')
+export const logo = require('./logo.svg')
+export const visa = require('./visa.jpg')
+export const mastercard = require('./mastercard.jpg')
+export const paypal = require('./paypal.jpg')
+export const successAnimation = require('./success-animation.gif')

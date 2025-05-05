@@ -1,7 +1,7 @@
 type AnyObject = Record<string, any>
 
 export type FetcherParams = {
-  path: string
+  path?: string
   id?: string
   params?: AnyObject
 }

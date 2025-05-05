@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react'
 
-import { DescriptionProps } from './index.types'
+import { DescriptionProps } from './types'
 import Text from '../text'
 
 const Description: FC<DescriptionProps> = (props) => {
@@ -8,7 +8,7 @@ const Description: FC<DescriptionProps> = (props) => {
 
   return (
     <div>
-      <Text className='font-semibold'>{label}</Text>
+      <Text variant='body1'>{label}</Text>
       <Text>{children}</Text>
     </div>
   )

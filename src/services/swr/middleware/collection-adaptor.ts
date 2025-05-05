@@ -1,27 +1,36 @@
 import omit from 'lodash/omit'
-import { Middleware, SWRHook } from 'swr'
+import { SWRHook } from 'swr'
 import { proxy, snapshot } from 'valtio'
 
-export const collectionAdaptor = (
-  computeFn?: (state: any) => any,
-  collectionProp = 'data'
-): Middleware => {
+import { CollectionAdaptor } from './collection-adaptor.type'
+import { mapData } from './collection-mapper'
+
+export const collectionAdaptor: CollectionAdaptor = ({
+  computeFn,
+  collectionName = 'data',
+  keyMapping
+}) => {
   return (useSWRNext: SWRHook) => {
     return (key, fetcher, config) => {
       const swr = useSWRNext<any>(key, fetcher, config)
 
-      if (computeFn && swr.data?.[collectionProp]) {
-        const collection = swr.data[collectionProp].map((item: any) => {
-          const state = proxy<any>(item)
-          const computed = computeFn(state)
+      if (swr.data) {
+        const mappedData = mapData(swr.data, collectionName, keyMapping)
 
-          return { ...snapshot(state), ...snapshot(computed) }
+        const collection = mappedData[collectionName]?.map((item: any) => {
+          const state = proxy<any>(item)
+          const stateSnapshot = snapshot(state)
+
+          const computed = computeFn && computeFn(state)
+          const computedSnapshot = computed ? snapshot(computed) : {}
+
+          return { ...stateSnapshot, ...computedSnapshot }
         })
 
         return Object.assign({}, swr, {
           data: {
-            ...omit(swr.data, collectionProp),
-            [collectionProp]: collection
+            ...omit(mappedData, collectionName),
+            [collectionName]: collection
           }
         })
       }

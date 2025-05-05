@@ -1,11 +1,17 @@
+import { useTranslation } from 'react-i18next'
+import { toast } from 'sonner'
+
 import { FileType } from './file-uploader.types'
 
 export default function useFileUploader(
   showPreview = true,
   multiSelect = false,
   defaultValues?: FileType[],
-  onFileUpload?: (files?: FileType[]) => void
+  onFileUpload?: (files?: FileType[]) => void,
+  maxFiles?: number
 ) {
+  const { t } = useTranslation('common')
+
   const handleAcceptedFiles = (files: FileType[]) => {
     const allFiles: FileType[] = []
 
@@ -22,6 +28,12 @@ export default function useFileUploader(
     }
 
     if (multiSelect) {
+      if (defaultValues?.length >= maxFiles) {
+        toast.error(t('cannot_upload_file'), {
+          description: t('max_files_reached')
+        })
+        return
+      }
       if (Array.isArray(defaultValues)) allFiles.push(...defaultValues)
       allFiles.push(...files)
     } else {

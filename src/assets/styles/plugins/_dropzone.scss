@@ -1,8 +1,8 @@
 .dropzone {
-  @apply min-h-[150px] cursor-pointer rounded-md border-2 border-dashed border-gray-300 bg-white p-5;
+  @apply min-h-[150px] cursor-pointer rounded-md border-1 border-dashed border-color-palette-blue bg-transparent p-rgAlt;
 
   .dz-message {
-    @apply mx-8 text-center;
+    @apply text-center;
   }
 
   &.dz-started {

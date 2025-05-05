@@ -14,7 +14,6 @@ import { useTranslation } from 'react-i18next'
 import { ModalWithFormProps } from './types'
 import FormProvider from '../form-provider'
 import { useModalWithForm } from './hook'
-import { defaultModalMotion } from '../../modal'
 
 const ModalWithForm: FC<ModalWithFormProps> = (props) => {
   const { t } = useTranslation()
@@ -38,13 +37,7 @@ const ModalWithForm: FC<ModalWithFormProps> = (props) => {
 
   return (
     <>
-      <HModal
-        isOpen={visible}
-        placement='center'
-        onClose={onCancel}
-        motionProps={defaultModalMotion}
-        {...rest}
-      >
+      <HModal isOpen={visible} placement='center' onClose={onCancel} {...rest}>
         <ModalContent>
           {() => (
             <>

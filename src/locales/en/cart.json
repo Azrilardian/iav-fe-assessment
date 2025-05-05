@@ -1,0 +1,12 @@
+{
+  "no_products_in_cart": "No products in cart",
+  "please_add_some_products": "Please add some products",
+  "order_summary": "Order Summary",
+  "subtotal": "Subtotal",
+  "shipping": "Shipping",
+  "total": "Total",
+  "tax_include": "(Tax incl.)",
+  "continue": "Continue",
+  "agree_to_terms": "I agree to the terms and conditions",
+  "more_than_notifications": "More than {{count}} notifications"
+}

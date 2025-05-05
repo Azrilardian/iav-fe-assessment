@@ -1,59 +1,84 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-import { Button, Card } from '@heroui/react'
+import { Card } from '@heroui/react'
 import Image from 'next/image'
-import Link from 'next/link'
 import Dropzone from 'react-dropzone'
 import { useTranslation } from 'react-i18next'
 
 import { FileUploaderProps } from './file-uploader.types'
+import { handleFileUploadError } from './helpers'
 import useFileUploader from './use-file-uploader'
+import Button from '../../button'
+import Icon from '../../icon'
 import Text from '../../text'
 
-export const FileUploader = ({
-  showPreview = true,
-  multiSelect = false,
-  acceptedFile,
-  onFileUpload,
-  hint,
-  isInvalid,
-  name,
-  value
-}: FileUploaderProps) => {
-  const { t } = useTranslation()
+// 10 MB
+const MAX_FILE_SIZE = 2 * 1024 * 1024
+
+const FileUploader: FC<FileUploaderProps> = (props) => {
+  const { t } = useTranslation('common')
+
+  const {
+    showPreview = true,
+    maxFiles,
+    multiSelect = maxFiles > 1,
+    acceptedFile,
+    onFileUpload,
+    isInvalid,
+    name,
+    value,
+    hint = t('max_file_size_allowed')
+  } = props
 
   const { handleAcceptedFiles, removeFile } = useFileUploader(
     showPreview,
     multiSelect,
     value,
-    onFileUpload
+    onFileUpload,
+    maxFiles
   )
 
   return (
     <>
       <Dropzone
         multiple={multiSelect}
-        maxFiles={multiSelect ? 0 : 1}
+        maxFiles={multiSelect ? maxFiles : 0}
         accept={acceptedFile}
         onDrop={(acceptedFiles) => handleAcceptedFiles(acceptedFiles)}
+        maxSize={MAX_FILE_SIZE}
+        onDropRejected={handleFileUploadError}
       >
         {({ getRootProps, getInputProps }) => {
           return (
             <div
-              className={`${isInvalid ? 'border-2 border-red-400' : ''}`}
+              className={`${isInvalid ? 'dropzone !border-color-error' : 'dropzone'}`}
               data-test-id={name}
               {...getRootProps()}
             >
               <div className='dz-message'>
                 <input {...getInputProps()} />
-                <i className=''></i>
-                <h5>{t('Drop files here or click to upload.')}</h5>
-
-                {hint && (
-                  <Text tag='small' className='muted'>
-                    {hint}
+                <div className='flex flex-col items-center'>
+                  <Icon
+                    icon='icon-backup'
+                    size={36}
+                    className='text-color-palette-blue'
+                  />
+                  <Text tag='span' className='mb-xsAlt mt-md'>
+                    {t('drag_your_file_or')}
+                    <span className='text-color-palette-blue'>
+                      {t('browse')}
+                    </span>
                   </Text>
-                )}
+                  {hint && (
+                    <Text
+                      tag='small'
+                      variant='body3'
+                      className='text-muted leading-[130%]'
+                    >
+                      {hint}
+                    </Text>
+                  )}
+                </div>
               </div>
             </div>
           )
@@ -62,16 +87,17 @@ export const FileUploader = ({
       {showPreview && Array.isArray(value) && (
         <div className='dropzone-previews mt-3'>
           {value.map((f, i) => (
-            <Card className='mb-0 mt-1 border shadow-none' key={i + '-file'}>
+            <Card className='mb-3 mt-1 border shadow-none' key={i + '-file'}>
               <div className='p-2'>
                 <div className='flex items-center'>
                   {f.preview && (
-                    <div>
+                    <div className='mr-2'>
                       <Image
-                        data-dz-thumbnail=''
-                        className='rounded bg-slate-100'
+                        className='aspect-square rounded object-cover'
                         alt={f.name}
                         src={f.preview}
+                        width={45}
+                        height={45}
                       />
                     </div>
                   )}
@@ -86,24 +112,25 @@ export const FileUploader = ({
                   )}
                   <div>
                     {f.name && (
-                      <Link href='#' className='muted font-bold'>
+                      <Text tag='span' variant='body3' className='mb-0'>
                         {f.name}
-                      </Link>
+                      </Text>
                     )}
                     {f.formattedSize && (
-                      <p className='mb-0'>
+                      <Text tag='span' variant='body3' className='mb-0'>
                         <strong>{f.formattedSize}</strong>
-                      </p>
+                      </Text>
                     )}
                   </div>
-                  <div className='text-end'>
+                  <div className='ml-auto'>
                     <Button
-                      variant='ghost'
-                      className='muted shadow-none'
+                      isIconOnly
+                      radius='full'
+                      variant='light'
+                      className='reset-padding'
+                      label={<Icon icon='icon-minus' size={16} />}
                       onPress={() => removeFile(value, f)}
-                    >
-                      <i className=''></i>
-                    </Button>
+                    />
                   </div>
                 </div>
               </div>
@@ -114,3 +141,5 @@ export const FileUploader = ({
     </>
   )
 }
+
+export default FileUploader
