@@ -1,6 +1,10 @@
 import React from 'react'
 
+import { useIsMobile } from '@/src/hooks/use-mobile'
+
 const ProductCardsSkeleton = () => {
+  const isMobile = useIsMobile()
+
   return (
     <div className=''>
       <div className='mb-lg grid items-start gap-lgAlt gap-y-2xlAlt sm:grid-cols-2 lg:grid-cols-3'>
@@ -17,7 +21,7 @@ const ProductCardsSkeleton = () => {
       </div>
       <div className='flex items-center justify-center'>
         <div className='flex items-center gap-2'>
-          {Array.from({ length: 11 }).map((_, index) => (
+          {Array.from({ length: isMobile ? 5 : 11 }).map((_, index) => (
             <div key={index} className='skeleton h-8 w-8 rounded-md' />
           ))}
         </div>
