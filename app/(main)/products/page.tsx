@@ -13,7 +13,7 @@ import ProductsHeader from './_components/products-header'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `Our Products - ${PROJECT_NAME}`,
+    title: `Our Productss - ${PROJECT_NAME}`,
     description: `Browse our collection of products`
   }
 }
